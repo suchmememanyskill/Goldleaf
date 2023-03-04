@@ -85,7 +85,7 @@ namespace nsp {
         GLEAF_RC_UNLESS(system_keygen >= this->keygen, err::result::ResultKeyGenMismatch);
 
         FsFileSystem cnmt_nca_fs;
-        GLEAF_RC_TRY(fsOpenFileSystemWithId(&cnmt_nca_fs, 0, FsFileSystemType_ContentMeta, cnmt_nca_content_path, FsContentAttributes_None));
+        GLEAF_RC_TRY(fsOpenFileSystemWithId(&cnmt_nca_fs, 0, FsFileSystemType_ContentMeta, cnmt_nca_content_path, FsContentAttributes_All));
         
         {
             fs::FspExplorer cnmt_nca_fs_obj(cnmt_nca_fs, "nsp.ContentMeta");
@@ -141,7 +141,7 @@ namespace nsp {
                     char control_nca_content_path[FS_MAX_PATH] = {};
                     sprintf(control_nca_content_path, "@SystemContent://temp/%s", control_nca_file_name.c_str());
                     FsFileSystem control_nca_fs;
-                    if(R_SUCCEEDED(fsOpenFileSystemWithId(&control_nca_fs, this->cnt_meta_key.id, FsFileSystemType_ContentControl, control_nca_content_path, FsContentAttributes_None))) {
+                    if(R_SUCCEEDED(fsOpenFileSystemWithId(&control_nca_fs, this->cnt_meta_key.id, FsFileSystemType_ContentControl, control_nca_content_path, FsContentAttributes_All))) {
                         fs::FspExplorer control_nca_fs_obj(control_nca_fs, "nsp.ControlData");
                         for(auto &cnt: control_nca_fs_obj.GetContents()) {
                             if(fs::GetExtension(cnt) == "dat") {

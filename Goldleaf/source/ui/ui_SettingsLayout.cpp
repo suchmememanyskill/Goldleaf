@@ -73,7 +73,7 @@ namespace ui {
         for(const auto &file: files) {
             const auto original_nca = "@SystemContent:/registered/" + file;
             FsFileSystem nca_fs;
-            const auto rc = fsOpenFileSystemWithId(&nca_fs, 0, FsFileSystemType_ContentMeta, original_nca.c_str(), FsContentAttributes_None);
+            const auto rc = fsOpenFileSystemWithId(&nca_fs, 0, FsFileSystemType_ContentMeta, original_nca.c_str(), FsContentAttributes_All);
             if(R_SUCCEEDED(rc)) {
                 // Is a meta NCA
                 const auto out_nca_path = out_dir + "/" + file;
